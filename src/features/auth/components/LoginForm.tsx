@@ -58,7 +58,6 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                     error={formState.errors["password"]}
                     registration={register("password")}
                   />
-                  <MultiSelect />
                   <div className="d-flex justify-content-center">
                     <Button
                       startIcon={<i className="fa-solid fa-lock" />}
