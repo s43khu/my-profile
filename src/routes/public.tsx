@@ -8,7 +8,7 @@ export const publicRoutes = [
   //   element: <AuthRoutes />,
   // },
   {
-    path: '',
+    path: '/',
     element:<PublicRoutes/>
   }
 ];
