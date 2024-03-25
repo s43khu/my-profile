@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { useRef, Suspense } from "react";
+import { useRef, Suspense, useState, useEffect } from "react";
 import { Canvas, useThree, useFrame, useLoader } from "@react-three/fiber";
 import {
   Reflector,
@@ -31,15 +31,7 @@ const Rig = ({ children }: any) => {
   return <group ref={ref}>{children}</group>;
 };
 
-// const TextMaterial = () => {
-//   const texture = useLoader(THREE.TextureLoader, var1);
-//   const material = new THREE.MeshBasicMaterial({ map: texture });
-
-//   return material;
-// };
-
 const Ground = (props: JSX.IntrinsicElements["Reflector"]) => {
-  // prettier-ignore
   const [floor, normal] = useTexture([var1, normalTex]);
   return (
     <Reflector resolution={1024} args={[8, 8]} {...props}>
@@ -58,13 +50,19 @@ const Ground = (props: JSX.IntrinsicElements["Reflector"]) => {
 };
 
 export const Landing = () => {
+  const [fadeIn, setFadeIn] = useState(false);
+
+  useEffect(() => {
+    // Trigger fade-in animation
+    setFadeIn(true);
+  }, []);
+
   return (
     <div style={{ width: "100%", height: "100vh" }}>
       <Canvas
         style={{ width: "100%", height: "100%" }}
         dpr={[0.7, 1.5]}
         camera={{ position: [1.5, 1.7, 15] }}
-        fog={new THREE.TextureLoader().load(fogTexture)}
       >
         <color attach="background" args={["black"]} />
         <ambientLight />
@@ -77,15 +75,15 @@ export const Landing = () => {
           <Rig>
             <Text
               font={poppin}
-              position={[0, -0.4, 0]}
+              position={[0, -0.4, fadeIn ? 0 : -5]} // Start position behind the background
               lineHeight={0.6}
               textAlign="center"
               rotation-y={degToRad(30)}
               anchorY={"bottom"}
-              // material={TextMaterial()} // Apply material directly
               color="red"
+              opacity={fadeIn ? 1 : 0} // Start with opacity 0 and gradually increase to 1
             >
-              S43khu
+              SH3KHU
             </Text>
             <Ground
               mirror={1}

@@ -3,10 +3,12 @@ import "./App.css";
 
 import { AppProvider } from "@/providers/app";
 import { AppRoutes } from "@/routes";
+import CustomCursor from "./assets/cursor/Cursor";
 
 function App() {
   return (
     <AppProvider>
+      <CustomCursor />
       <AppRoutes />
     </AppProvider>
   );
